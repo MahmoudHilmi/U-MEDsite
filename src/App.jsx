@@ -186,10 +186,10 @@ function Navbar({ onOpenDeck }) {
 
   return (
     <nav className="fixed w-full top-0 z-50 bg-white border-b border-black">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div className="flex items-center space-x-3 cursor-pointer group">
-          <Activity className="text-black h-6 w-6 stroke-[1.5]" />
-          <span className="font-bold text-2xl tracking-tighter font-display">CURA</span>
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+        <div className="flex items-center space-x-2 sm:space-x-3 cursor-pointer group">
+          <Activity className="text-black h-5 w-5 sm:h-6 sm:w-6 stroke-[1.5]" />
+          <span className="font-bold text-xl sm:text-2xl tracking-tighter font-display">CURA</span>
         </div>
 
         <div className="hidden md:flex space-x-12 text-[11px] font-mono font-bold tracking-[0.2em] text-black">
@@ -249,18 +249,18 @@ function BentoCard({ icon, title, desc, delay }) {
   );
 }
 
-function MetricItem({ value, label, accent, delay }) {
+function MetricItem({ value, label, delay }) {
   const [ref, isVisible] = useScrollReveal();
   return (
     <div 
       ref={ref}
-      className={`px-6 py-16 group hover:bg-white/10 transition-instant border-r border-white/20 last:border-0 ${isVisible ? 'section-visible' : 'section-hidden'}`}
+      className={`px-6 py-12 sm:py-16 group hover:bg-white/10 transition-instant border-b sm:border-b-0 sm:border-r border-white/20 last:border-0 ${isVisible ? 'section-visible' : 'section-hidden'}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="text-7xl font-bold font-display mb-3 tracking-tighter">
+      <div className="text-5xl sm:text-7xl font-bold font-display mb-3 tracking-tighter">
         {value}
       </div>
-      <div className="text-[11px] font-mono font-bold uppercase tracking-[0.3em] opacity-50">
+      <div className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-[0.3em] opacity-50">
         {label}
       </div>
     </div>
@@ -268,7 +268,7 @@ function MetricItem({ value, label, accent, delay }) {
 }
 
 function Button({ children, variant = "primary", className = "", ...props }) {
-  const baseStyles = "px-10 py-5 text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-instant flex items-center justify-center border-2";
+  const baseStyles = "px-6 sm:px-10 py-4 sm:py-5 text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-instant flex items-center justify-center border-2";
   const variants = {
     primary: "bg-black text-white border-black hover:bg-white hover:text-black",
     secondary: "bg-white text-black border-black hover:bg-black hover:text-white",
@@ -285,8 +285,8 @@ function Button({ children, variant = "primary", className = "", ...props }) {
 function SectionHeader({ title, subtitle, description, align = "center", light = false }) {
   const alignment = align === "center" ? "text-center items-center mx-auto" : "text-left items-start";
   return (
-    <div className={`flex flex-col max-w-5xl mb-24 ${alignment}`}>
-      <h2 className={`text-[clamp(3rem,8vw,6rem)] font-bold tracking-tight mb-8 leading-[0.9] font-display ${light ? 'text-white' : 'text-black'}`}>
+    <div className={`flex flex-col max-w-5xl mb-12 sm:mb-24 ${alignment}`}>
+      <h2 className={`text-[clamp(1.75rem,8vw,6rem)] font-bold tracking-tight mb-4 sm:mb-8 leading-[1] sm:leading-[0.9] font-display ${light ? 'text-white' : 'text-black'}`}>
         {title}
         {subtitle && (
           <>
@@ -296,7 +296,7 @@ function SectionHeader({ title, subtitle, description, align = "center", light =
         )}
       </h2>
       {description && (
-        <p className={`text-xl lg:text-2xl font-body leading-relaxed max-w-3xl ${light ? 'text-white/70' : 'text-black/60'}`}>
+        <p className={`text-base sm:text-xl lg:text-2xl font-body leading-relaxed max-w-3xl ${light ? 'text-white/70' : 'text-black/60'}`}>
           {description}
         </p>
       )}
@@ -349,30 +349,30 @@ export default function App() {
       {/* ── HERO ─────────────────────────────────── */}
       <section
         id="platform"
-        className="relative flex items-center justify-center min-h-screen px-6 pt-40 pb-32 bg-white overflow-hidden"
+        className="relative flex items-center justify-center min-h-screen px-5 sm:px-6 pt-28 sm:pt-40 pb-20 sm:pb-32 bg-white overflow-hidden"
       >
         <div className="absolute inset-0 bg-mono-grid" />
         
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-start text-left">
-          <div className="inline-block border border-black px-4 py-2 text-[10px] font-mono font-bold tracking-[0.3em] uppercase mb-12 animate-fade-in">
+          <div className="inline-block border border-black px-3 sm:px-4 py-1.5 sm:py-2 text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.3em] uppercase mb-8 sm:mb-12 animate-fade-in">
             GEMINI 1.5 INTEGRATION LIVE
           </div>
 
-          <h1 className="text-[clamp(4rem,15vw,12rem)] font-bold leading-[0.8] font-display text-black mb-12 tracking-tighter">
+          <h1 className="text-[clamp(2.5rem,15vw,12rem)] font-bold leading-[0.85] sm:leading-[0.8] font-display text-black mb-8 sm:mb-12 tracking-tighter">
             STARK<br />
             <span className="italic font-medium text-gray-400">INTELLIGENCE.</span>
           </h1>
 
-          <div className="w-full h-1 bg-black mb-16" />
+          <div className="w-full h-0.5 sm:h-1 bg-black mb-10 sm:mb-16" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-end w-full">
-            <p className="text-2xl sm:text-3xl font-body leading-relaxed text-black max-w-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-20 items-end w-full">
+            <p className="text-lg sm:text-2xl lg:text-3xl font-body leading-relaxed text-black max-w-2xl">
               CURA orchestrates real-time synergy between patients, clinics, and
               pharmacies — removing friction to ensure life-saving accuracy at
               scale.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 w-full sm:w-auto">
               <Button className="w-full sm:w-auto">
                 EXPLORE CORE <ArrowRight className="ml-3 h-5 w-5" />
               </Button>
@@ -387,10 +387,10 @@ export default function App() {
       <div className="h-2 bg-black w-full" />
 
       {/* ── METRICS ──────────────────────────────── */}
-      <section className="bg-black text-white py-0 relative overflow-hidden">
+      <section className="bg-black text-white py-0 relative overflow-hidden border-b border-white/10">
         <div className="absolute inset-0 bg-lines-v" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { value: "100k+", label: "SYSTEM NODES" },
               { value: "4.5M", label: "EXECUTIONS" },
@@ -437,27 +437,27 @@ export default function App() {
               </div>
             </div>
 
-            <div className="relative group animate-fade-in">
-              <div className="bg-white border-[3px] border-black p-1 transition-instant group-hover:-translate-y-2 group-hover:translate-x-2">
+            <div className="relative group animate-fade-in w-full overflow-hidden">
+              <div className="bg-white border-[3px] border-black p-0.5 sm:p-1 transition-instant sm:group-hover:-translate-y-2 sm:group-hover:translate-x-2">
                 <div className="border border-black overflow-hidden">
-                  <div className="flex items-center space-x-2 px-6 py-4 border-b border-black bg-gray-50">
-                    <div className="w-2.5 h-2.5 bg-black" />
-                    <div className="w-2.5 h-2.5 bg-black/40" />
-                    <div className="w-2.5 h-2.5 bg-black/10" />
-                    <div className="text-[11px] text-black ml-4 font-mono font-bold tracking-widest uppercase">
+                  <div className="flex items-center space-x-2 px-4 sm:px-6 py-3 sm:py-4 border-b border-black bg-gray-50">
+                    <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-black" />
+                    <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-black/40" />
+                    <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-black/10" />
+                    <div className="text-[9px] sm:text-[11px] text-black ml-2 sm:ml-4 font-mono font-bold tracking-widest uppercase truncate">
                       inference_engine.js
                     </div>
                   </div>
-                  <div className="p-8 font-mono text-[13px] leading-relaxed bg-white">
-                    <p className="text-black/40 mb-4">{"// Executing clinical parse"}</p>
-                    <p className="text-black">
+                  <div className="p-4 sm:p-8 font-mono text-[11px] sm:text-[13px] leading-relaxed bg-white overflow-x-auto">
+                    <p className="text-black/40 mb-3 sm:mb-4 whitespace-nowrap">{"// Executing clinical parse"}</p>
+                    <p className="text-black whitespace-nowrap">
                       <span className="font-bold">const</span> result = <span className="font-bold">await</span> gemini.parse(rx);
                     </p>
-                    <div className="bg-gray-50 p-6 mt-6 border-l-4 border-black">
+                    <div className="bg-gray-50 p-4 sm:p-6 mt-4 sm:mt-6 border-l-4 border-black min-w-[200px]">
                       <p className="text-black">{"{"}</p>
-                      <p className="pl-6"><span className="text-black/50">"medication"</span>: <span className="font-bold">"Amoxicillin 500mg"</span>,</p>
-                      <p className="pl-6"><span className="text-black/50">"stock"</span>: <span className="font-bold">true</span>,</p>
-                      <p className="pl-6"><span className="text-black/50">"confidence"</span>: <span className="font-bold">0.9992</span></p>
+                      <p className="pl-4 sm:pl-6 whitespace-nowrap"><span className="text-black/50">"medication"</span>: <span className="font-bold">"Amoxicillin"</span>,</p>
+                      <p className="pl-4 sm:pl-6"><span className="text-black/50">"stock"</span>: <span className="font-bold">true</span>,</p>
+                      <p className="pl-4 sm:pl-6"><span className="text-black/50">"confidence"</span>: <span className="font-bold">0.99</span></p>
                       <p className="text-black">{"}"}</p>
                     </div>
                   </div>
@@ -508,14 +508,14 @@ export default function App() {
       {/* ── SCALE CTA ────────────────────────────── */}
       <section
         id="scale"
-        className="py-40 px-6 bg-black text-white relative overflow-hidden"
+        className="py-24 sm:py-40 px-6 bg-black text-white relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-lines-v opacity-20" />
         
         <SectionReveal>
           <div className="relative z-10 flex flex-col items-center text-center">
-            <div className="w-24 h-24 bg-white text-black flex items-center justify-center mb-16 border border-white hover:bg-black hover:text-white transition-instant group cursor-pointer">
-              <Activity className="h-12 w-12 group-hover:scale-125 transition-transform" />
+            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white text-black flex items-center justify-center mb-12 sm:mb-16 border border-white hover:bg-black hover:text-white transition-instant group cursor-pointer">
+              <Activity className="h-10 w-10 sm:h-12 sm:w-12 group-hover:scale-125 transition-transform" />
             </div>
             
             <SectionHeader 
@@ -525,9 +525,9 @@ export default function App() {
               description="Forged in Cairo's high-density medical sector. A system built to handle extreme fragmentation is ready to deploy globally."
             />
 
-            <div className="flex flex-col sm:flex-row gap-6 mt-12">
-              <Button variant="secondary" className="border-white">REQUEST IMPLEMENTATION</Button>
-              <Button variant="ghost" onClick={() => setModalOpen(true)} className="text-white hover:text-white">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4 sm:mt-12 w-full sm:w-auto">
+              <Button variant="secondary" className="border-white w-full sm:w-auto">REQUEST IMPLEMENTATION</Button>
+              <Button variant="ghost" onClick={() => setModalOpen(true)} className="text-white hover:text-white w-full sm:w-auto">
                 VIEW INVESTOR DECK →
               </Button>
             </div>
