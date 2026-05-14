@@ -177,89 +177,47 @@ function PitchDeckModal({ isOpen, onClose }) {
 function Navbar({ onOpenDeck }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close menu on resize to md+
-  useEffect(() => {
-    const handler = () => {
-      if (window.innerWidth >= 768) setMenuOpen(false);
-    };
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, []);
-
   const links = [
-    { href: "#platform", label: "Platform" },
-    { href: "#intelligence", label: "Intelligence" },
-    { href: "#infrastructure", label: "Security" },
-    { href: "#scale", label: "Scale" },
+    { href: "#platform", label: "PLATFORM" },
+    { href: "#intelligence", label: "INTELLIGENCE" },
+    { href: "#infrastructure", label: "SECURITY" },
+    { href: "#scale", label: "SCALE" },
   ];
 
   return (
-    <nav className="fixed w-full top-0 z-50 bg-[#FBFBFD]/80 backdrop-blur-2xl border-b border-gray-200/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center space-x-2 group cursor-pointer">
-          <div className="bg-black p-1 rounded-lg group-hover:rotate-12 transition-transform duration-300">
-            <Activity className="text-white h-5 w-5 sm:h-6 sm:w-6 stroke-[2.5]" />
-          </div>
-          <span className="font-bold text-lg sm:text-xl tracking-tighter text-black">
-            CURA
-          </span>
+    <nav className="fixed w-full top-0 z-50 bg-white border-b border-black">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="flex items-center space-x-3 cursor-pointer group">
+          <Activity className="text-black h-6 w-6 stroke-[1.5]" />
+          <span className="font-bold text-2xl tracking-tighter font-display">CURA</span>
         </div>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex space-x-8 lg:space-x-10 text-sm font-medium tracking-wide text-[#86868B]">
+        <div className="hidden md:flex space-x-12 text-[11px] font-mono font-bold tracking-[0.2em] text-black">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="hover:text-black transition-colors relative group"
-            >
+            <a key={l.href} href={l.href} className="hover:line-through transition-all">
               {l.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full" />
             </a>
           ))}
         </div>
 
-        {/* Desktop CTA */}
         <button
           onClick={onOpenDeck}
-          className="hidden md:block bg-black text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full text-sm font-semibold hover:bg-gray-800 transition-all shadow-md hover:shadow-xl active:scale-95"
+          className="hidden md:block bg-black text-white px-8 py-3 text-[11px] font-mono font-bold tracking-[0.2em] hover:bg-white hover:text-black border border-black transition-instant"
         >
-          Request Demo
+          REQUEST DEMO
         </button>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setMenuOpen((v) => !v)}
-          className="md:hidden p-2 text-[#1D1D1F] rounded-lg hover:bg-gray-100 transition-colors"
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden p-2 text-black">
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-b border-gray-100 shadow-md py-4 px-4">
+        <div className="md:hidden bg-white border-b border-black py-8 px-6 space-y-6">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setMenuOpen(false)}
-              className="block py-3 px-2 text-black font-medium text-base border-b border-gray-50 last:border-0 hover:pl-4 transition-all"
-            >
-              {l.label}
-            </a>
+            <a key={l.href} href={l.href} className="block text-2xl font-display font-bold">{l.label}</a>
           ))}
-          <button
-            onClick={() => {
-              setMenuOpen(false);
-              onOpenDeck();
-            }}
-            className="mt-3 w-full bg-black text-white px-5 py-3 rounded-full text-sm font-semibold shadow-lg"
-          >
-            Request Demo
-          </button>
+          <button className="w-full bg-black text-white py-4 font-mono font-bold">REQUEST DEMO</button>
         </div>
       )}
     </nav>
@@ -275,16 +233,16 @@ function BentoCard({ icon, title, desc, delay }) {
   return (
     <div 
       ref={ref}
-      className={`bg-white p-6 sm:p-8 lg:p-10 rounded-2xl sm:rounded-[28px] border-2 border-gray-100 hover:border-black hover:shadow-2xl transition-all duration-500 group ${isVisible ? 'section-visible' : 'section-hidden'}`}
+      className={`group bg-white p-10 border border-black transition-instant hover:bg-black hover:text-white ${isVisible ? 'section-visible' : 'section-hidden'}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl shadow-lg flex items-center justify-center mb-6 sm:mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all">
+      <div className="w-12 h-12 bg-black text-white border border-white flex items-center justify-center mb-10 group-hover:bg-white group-hover:text-black transition-instant">
         {icon}
       </div>
-      <h3 className="text-lg sm:text-xl font-bold text-black tracking-tight mb-2 sm:mb-3">
+      <h3 className="text-2xl font-bold font-display mb-4 tracking-tight">
         {title}
       </h3>
-      <p className="text-[#86868B] leading-relaxed font-medium text-sm sm:text-[15px] group-hover:text-black transition-colors">
+      <p className="font-body text-[17px] leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity">
         {desc}
       </p>
     </div>
@@ -296,13 +254,13 @@ function MetricItem({ value, label, accent, delay }) {
   return (
     <div 
       ref={ref}
-      className={`px-4 py-8 sm:py-12 group hover:bg-gray-50 transition-all duration-700 ${isVisible ? 'section-visible' : 'section-hidden'}`}
+      className={`px-6 py-16 group hover:bg-white/10 transition-instant border-r border-white/20 last:border-0 ${isVisible ? 'section-visible' : 'section-hidden'}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className={`text-3xl sm:text-4xl lg:text-6xl font-bold mb-1 sm:mb-2 tracking-tighter transition-transform group-hover:scale-110 ${accent ? "text-black" : "text-black/80"}`}>
+      <div className="text-7xl font-bold font-display mb-3 tracking-tighter">
         {value}
       </div>
-      <div className={`text-[10px] sm:text-[13px] font-bold uppercase tracking-[0.2em] ${accent ? "text-black" : "text-[#86868B]"}`}>
+      <div className="text-[11px] font-mono font-bold uppercase tracking-[0.3em] opacity-50">
         {label}
       </div>
     </div>
@@ -310,11 +268,11 @@ function MetricItem({ value, label, accent, delay }) {
 }
 
 function Button({ children, variant = "primary", className = "", ...props }) {
-  const baseStyles = "px-8 py-4 sm:py-5 rounded-full text-base sm:text-[17px] font-bold transition-all shadow-xl hover:-translate-y-1 active:scale-95 flex items-center justify-center";
+  const baseStyles = "px-10 py-5 text-[11px] font-mono font-bold tracking-[0.2em] uppercase transition-instant flex items-center justify-center border-2";
   const variants = {
-    primary: "bg-black text-white hover:bg-gray-800",
-    secondary: "bg-white border-2 border-black text-black hover:bg-gray-50 shadow-sm",
-    ghost: "bg-transparent text-black hover:bg-gray-100 shadow-none"
+    primary: "bg-black text-white border-black hover:bg-white hover:text-black",
+    secondary: "bg-white text-black border-black hover:bg-black hover:text-white",
+    ghost: "bg-transparent text-black border-transparent hover:line-through"
   };
 
   return (
@@ -327,18 +285,18 @@ function Button({ children, variant = "primary", className = "", ...props }) {
 function SectionHeader({ title, subtitle, description, align = "center", light = false }) {
   const alignment = align === "center" ? "text-center items-center mx-auto" : "text-left items-start";
   return (
-    <div className={`flex flex-col max-w-3xl mb-12 sm:mb-20 ${alignment}`}>
-      <h2 className={`text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-tight mb-6 sm:mb-8 leading-tight ${light ? 'text-white' : 'text-black'}`}>
+    <div className={`flex flex-col max-w-5xl mb-24 ${alignment}`}>
+      <h2 className={`text-[clamp(3rem,8vw,6rem)] font-bold tracking-tight mb-8 leading-[0.9] font-display ${light ? 'text-white' : 'text-black'}`}>
         {title}
         {subtitle && (
           <>
             <br />
-            <span className="text-gray-400">{subtitle}</span>
+            <span className="text-gray-400 italic font-medium">{subtitle}</span>
           </>
         )}
       </h2>
       {description && (
-        <p className={`text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed px-2 sm:px-0 ${light ? 'text-white/80' : 'text-[#86868B]'}`}>
+        <p className={`text-xl lg:text-2xl font-body leading-relaxed max-w-3xl ${light ? 'text-white/70' : 'text-black/60'}`}>
           {description}
         </p>
       )}
@@ -391,187 +349,152 @@ export default function App() {
       {/* ── HERO ─────────────────────────────────── */}
       <section
         id="platform"
-        className="relative flex items-center justify-center min-h-[100svh] overflow-hidden px-4 sm:px-6 pt-20 sm:pt-24 pb-16 sm:pb-24"
+        className="relative flex items-center justify-center min-h-screen px-6 pt-40 pb-32 bg-white overflow-hidden"
       >
-        <div className="absolute inset-0 bg-premium-grid opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-mono-grid" />
         
-        {/* Floating Decorative Elements */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gray-100 rounded-full blur-[100px] animate-float-slow opacity-60" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gray-200 rounded-full blur-[120px] animate-float opacity-40" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] lg:w-[800px] h-[300px] sm:h-[600px] lg:h-[800px] bg-gray-100 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none opacity-50" />
-
-        <div className="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
-          <div className="inline-flex items-center space-x-2 bg-black text-white px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-semibold tracking-wide mb-6 sm:mb-10 shadow-xl animate-fade-in">
-            <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-white flex-shrink-0" />
-            <span>Introducing Gemini 1.5 Clinical Integration</span>
+        <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-start text-left">
+          <div className="inline-block border border-black px-4 py-2 text-[10px] font-mono font-bold tracking-[0.3em] uppercase mb-12 animate-fade-in">
+            GEMINI 1.5 INTEGRATION LIVE
           </div>
 
-          <h1 className="text-[clamp(2.8rem,9vw,7rem)] font-bold tracking-tighter mb-5 sm:mb-8 leading-[0.9] text-black animate-fade-in">
-            The intelligent core <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-black via-gray-600 to-black bg-[length:200%_auto] animate-shimmer">
-              for modern healthcare.
-            </span>
+          <h1 className="text-[clamp(4rem,15vw,12rem)] font-bold leading-[0.8] font-display text-black mb-12 tracking-tighter">
+            STARK<br />
+            <span className="italic font-medium text-gray-400">INTELLIGENCE.</span>
           </h1>
 
-          <p className="text-base sm:text-xl md:text-2xl text-[#86868B] max-w-2xl mx-auto mb-8 sm:mb-14 font-medium tracking-tight leading-relaxed sm:leading-snug px-2 sm:px-0 animate-fade-in [animation-delay:0.2s]">
-            CURA orchestrates real-time synergy between patients, clinics, and
-            pharmacies — removing friction to ensure life-saving accuracy at
-            scale.
-          </p>
+          <div className="w-full h-1 bg-black mb-16" />
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full sm:w-auto px-2 sm:px-0 animate-fade-in [animation-delay:0.4s]">
-            <Button>
-              Explore Platform <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button variant="secondary" onClick={() => setModalOpen(true)}>
-              View Pitch Deck
-            </Button>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-end w-full">
+            <p className="text-2xl sm:text-3xl font-body leading-relaxed text-black max-w-2xl">
+              CURA orchestrates real-time synergy between patients, clinics, and
+              pharmacies — removing friction to ensure life-saving accuracy at
+              scale.
+            </p>
 
-          <div className="mt-20 animate-bounce cursor-pointer opacity-40 hover:opacity-100 transition-opacity">
-            <ChevronDown className="h-6 w-6" />
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Button className="w-full sm:w-auto">
+                EXPLORE CORE <ArrowRight className="ml-3 h-5 w-5" />
+              </Button>
+              <Button variant="secondary" onClick={() => setModalOpen(true)} className="w-full sm:w-auto">
+                INVESTOR DECK
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
+      <div className="h-2 bg-black w-full" />
+
       {/* ── METRICS ──────────────────────────────── */}
-      <section className="py-10 sm:py-16 bg-white border-y border-gray-100/50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 divide-x divide-y lg:divide-y-0 divide-gray-100 text-center">
+      <section className="bg-black text-white py-0 relative overflow-hidden">
+        <div className="absolute inset-0 bg-lines-v" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { value: "100k+", label: "Active System Nodes", accent: false },
-              { value: "4.5M", label: "Triage Executions", accent: false },
-              { value: "2.4K", label: "Verified Pharmacies", accent: false },
-              { value: "99.9%", label: "Platform Reliability", accent: true },
-            ].map(({ value, label, accent }, idx) => (
-              <MetricItem key={label} value={value} label={label} accent={accent} delay={idx * 100} />
+              { value: "100k+", label: "SYSTEM NODES" },
+              { value: "4.5M", label: "EXECUTIONS" },
+              { value: "2.4K", label: "PHARMACIES" },
+              { value: "99.9%", label: "RELIABILITY" },
+            ].map(({ value, label }, idx) => (
+              <MetricItem key={label} value={value} label={label} delay={idx * 50} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── AI CORE ENGINE ───────────────────────── */}
+      <div className="h-1 bg-black w-full" />
+
       <section
         id="intelligence"
-        className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden"
+        className="py-32 px-6 relative overflow-hidden bg-white"
       >
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-0 w-64 h-64 bg-gray-100 rounded-full blur-[100px] pointer-events-none opacity-40" />
+        <div className="absolute inset-0 bg-mono-grid" />
         <SectionReveal>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
-          {/* Text */}
-          <div>
-            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-black text-white rounded-2xl flex items-center justify-center mb-6 sm:mb-8 shadow-2xl">
-              <Cpu className="h-6 w-6 sm:h-7 sm:w-7" />
-            </div>
-            <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-4 sm:mb-6 text-black tracking-tight leading-tight">
-              Clinical intelligence.
-              <br />
-              <span className="text-gray-400">Built right in.</span>
-            </h2>
-            <p className="text-[#86868B] text-base sm:text-[18px] lg:text-[19px] mb-8 sm:mb-10 leading-relaxed font-medium">
-              By directly integrating Google Gemini 1.5 into our core routing
-              layer, CURA automatically interprets handwritten prescriptions,
-              triangulates symptom severity, and eliminates human-error latency.
-            </p>
-            <div className="space-y-6 sm:space-y-8">
-              <FeatureItem 
-                title="Optical Interpretation" 
-                desc="Converts physical doctor notes into structured, executable pharmacy routing data instantly." 
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+            <div>
+              <div className="w-16 h-16 bg-black text-white flex items-center justify-center mb-10 border border-black transition-instant hover:bg-white hover:text-black">
+                <Cpu className="h-8 w-8 stroke-[1.5]" />
+              </div>
+              
+              <SectionHeader 
+                align="left"
+                title="Clinical intelligence."
+                subtitle="Built right in."
+                description="By directly integrating Google Gemini 1.5 into our core routing layer, CURA automatically interprets handwritten prescriptions, triangulates symptom severity, and eliminates human-error latency."
               />
-              <FeatureItem 
-                dotColor="bg-gray-400"
-                title="Encrypted Analysis" 
-                desc="Symptom data is sanitized client-side before being processed by the intelligence layer." 
-              />
-            </div>
-          </div>
 
-          {/* Code window */}
-          <div className="relative group mt-8 lg:mt-0 animate-float">
-            <div className="absolute -inset-4 bg-gray-200 opacity-30 blur-2xl group-hover:opacity-50 transition duration-700 rounded-3xl" />
-            <div className="bg-white border-2 border-black p-1 sm:p-1.5 rounded-2xl sm:rounded-3xl shadow-2xl relative overflow-hidden transition-all duration-500 hover:rotate-1 hover:scale-[1.02]">
-              <div className="bg-white rounded-[16px] sm:rounded-[20px] border border-gray-100 overflow-hidden">
-                {/* Titlebar */}
-                <div className="flex items-center space-x-1.5 sm:space-x-2 px-4 sm:px-6 pt-4 sm:pt-5 pb-3 sm:pb-4 border-b border-gray-100/80 bg-white">
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FF5F56]" />
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FFBD2E]" />
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#27C93F]" />
-                  <div className="text-[10px] sm:text-xs text-[#86868B] ml-3 sm:ml-4 font-mono font-medium tracking-wide">
-                    inference_engine.js
+              <div className="space-y-10">
+                <FeatureItem 
+                  title="Optical Interpretation" 
+                  desc="Converts physical doctor notes into structured, executable pharmacy routing data instantly." 
+                />
+                <FeatureItem 
+                  dotColor="bg-gray-400"
+                  title="Encrypted Analysis" 
+                  desc="Symptom data is sanitized client-side before being processed by the intelligence layer." 
+                />
+              </div>
+            </div>
+
+            <div className="relative group animate-fade-in">
+              <div className="bg-white border-[3px] border-black p-1 transition-instant group-hover:-translate-y-2 group-hover:translate-x-2">
+                <div className="border border-black overflow-hidden">
+                  <div className="flex items-center space-x-2 px-6 py-4 border-b border-black bg-gray-50">
+                    <div className="w-2.5 h-2.5 bg-black" />
+                    <div className="w-2.5 h-2.5 bg-black/40" />
+                    <div className="w-2.5 h-2.5 bg-black/10" />
+                    <div className="text-[11px] text-black ml-4 font-mono font-bold tracking-widest uppercase">
+                      inference_engine.js
+                    </div>
                   </div>
-                </div>
-                {/* Code body */}
-                <div className="p-4 sm:p-6 font-mono text-[11px] sm:text-[13px] leading-relaxed overflow-x-auto">
-                  <p className="text-[#86868B] mb-3 sm:mb-4">
-                    {"/* Executing confident clinical parse */"}
-                  </p>
-                  <p className="text-black whitespace-nowrap">
-                    <span className="text-gray-400">const</span> result ={" "}
-                    <span className="text-black font-bold">await</span>{" "}
-                    gemini.parse(rx);
-                  </p>
-                  <div className="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4 mt-3 border border-gray-100 shadow-inner">
-                    <p className="text-black">{"{"}</p>
-                    <p className="pl-3 sm:pl-4">
-                      <span className="text-gray-500">"medication"</span>:{" "}
-                      <span className="text-black font-medium">
-                        "Amoxicillin 500mg"
-                      </span>
-                      ,
+                  <div className="p-8 font-mono text-[13px] leading-relaxed bg-white">
+                    <p className="text-black/40 mb-4">{"// Executing clinical parse"}</p>
+                    <p className="text-black">
+                      <span className="font-bold">const</span> result = <span className="font-bold">await</span> gemini.parse(rx);
                     </p>
-                    <p className="pl-3 sm:pl-4">
-                      <span className="text-gray-500">"stock_status"</span>:{" "}
-                      <span className="text-black font-medium">true</span>,
-                    </p>
-                    <p className="pl-3 sm:pl-4">
-                      <span className="text-gray-500">"confidence"</span>:{" "}
-                      <span className="text-black font-medium">0.9992</span>,
-                    </p>
-                    <p className="pl-3 sm:pl-4">
-                      <span className="text-gray-500">"routing"</span>:{" "}
-                      <span className="text-black font-medium">"Sector_7_Main"</span>
-                    </p>
-                    <p className="text-black">{"}"}</p>
+                    <div className="bg-gray-50 p-6 mt-6 border-l-4 border-black">
+                      <p className="text-black">{"{"}</p>
+                      <p className="pl-6"><span className="text-black/50">"medication"</span>: <span className="font-bold">"Amoxicillin 500mg"</span>,</p>
+                      <p className="pl-6"><span className="text-black/50">"stock"</span>: <span className="font-bold">true</span>,</p>
+                      <p className="pl-6"><span className="text-black/50">"confidence"</span>: <span className="font-bold">0.9992</span></p>
+                      <p className="text-black">{"}"}</p>
+                    </div>
                   </div>
-                  <p className="text-black font-bold mt-3 sm:mt-4 flex items-center">
-                    <span className="w-1.5 h-1.5 rounded-full bg-black mr-2 flex-shrink-0 animate-pulse" />
-                    Dispatched to available pharmacy.
-                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </SectionReveal>
-    </section>
+        </SectionReveal>
+      </section>
+
+      <div className="h-1 bg-black w-full" />
 
       {/* ── INFRASTRUCTURE ───────────────────────── */}
       <section
         id="infrastructure"
-        className="py-16 sm:py-24 lg:py-32 bg-white relative"
+        className="py-32 bg-white relative"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <SectionHeader 
             title="A fortress of infrastructure."
             description="We've bypassed fragile mapping frameworks in favor of a zero-dependency local discovery engine, secured by granular Supabase RLS protocols."
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-black">
             <BentoCard
-              icon={<Globe className="h-5 w-5 sm:h-6 sm:w-6" />}
+              icon={<Globe className="h-6 w-6 stroke-[1.5]" />}
               title="Locally Computed"
               desc="Haversine geometry runs on the edge. No dependency on Google Maps — zero external downtime, ever."
               delay={0}
             />
             <BentoCard
-              icon={<Shield className="h-5 w-5 sm:h-6 sm:w-6" />}
+              icon={<Shield className="h-6 w-6 stroke-[1.5]" />}
               title="Zero-Trust Vault"
               desc="Architected on Supabase. Row-level security ensures clinical data is only visible to the right participants."
               delay={100}
             />
             <BentoCard
-              icon={<Zap className="h-5 w-5 sm:h-6 sm:w-6" />}
+              icon={<Zap className="h-6 w-6 stroke-[1.5]" />}
               title="Real-Time Sync"
               desc="Sub-millisecond WebSockets ensure a vital prescription reaches the pharmacy in real time."
               delay={200}
@@ -580,34 +503,32 @@ export default function App() {
         </div>
       </section>
 
+      <div className="h-2 bg-black w-full" />
+
       {/* ── SCALE CTA ────────────────────────────── */}
       <section
         id="scale"
-        className="py-24 sm:py-32 lg:py-40 px-4 sm:px-6 bg-white relative overflow-hidden border-t border-gray-100"
+        className="py-40 px-6 bg-black text-white relative overflow-hidden"
       >
-        <div className="absolute inset-0 bg-premium-grid opacity-30" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-px bg-gradient-to-r from-transparent via-black to-transparent" />
+        <div className="absolute inset-0 bg-lines-v opacity-20" />
         
-        {/* Decorative floating shapes */}
-        <div className="absolute -top-24 -left-24 w-64 h-64 bg-gray-100 rounded-full blur-[100px] animate-float opacity-50" />
-        <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-gray-100 rounded-full blur-[100px] animate-float-slow opacity-50" />
-
         <SectionReveal>
-          <div className="relative z-10 flex flex-col items-center">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-black rounded-2xl flex items-center justify-center mb-10 shadow-2xl hover:rotate-12 transition-all cursor-pointer group">
-              <Activity className="h-8 w-8 sm:h-10 sm:w-10 text-white group-hover:scale-110 transition-transform" />
+          <div className="relative z-10 flex flex-col items-center text-center">
+            <div className="w-24 h-24 bg-white text-black flex items-center justify-center mb-16 border border-white hover:bg-black hover:text-white transition-instant group cursor-pointer">
+              <Activity className="h-12 w-12 group-hover:scale-125 transition-transform" />
             </div>
             
             <SectionHeader 
+              light
               title="Proven in complexity."
               subtitle="Designed for scale."
               description="Forged in Cairo's high-density medical sector. A system built to handle extreme fragmentation is ready to deploy globally."
             />
 
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <Button>Request Implementation</Button>
-              <Button variant="secondary" onClick={() => setModalOpen(true)}>
-                View Investor Deck
+            <div className="flex flex-col sm:flex-row gap-6 mt-12">
+              <Button variant="secondary" className="border-white">REQUEST IMPLEMENTATION</Button>
+              <Button variant="ghost" onClick={() => setModalOpen(true)} className="text-white hover:text-white">
+                VIEW INVESTOR DECK →
               </Button>
             </div>
           </div>
@@ -615,27 +536,45 @@ export default function App() {
       </section>
 
       {/* ── FOOTER ───────────────────────────────── */}
-      <footer className="bg-white border-t border-gray-100 py-8 sm:py-12 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div className="flex items-center space-x-2 text-black">
-            <Activity className="h-5 w-5 stroke-[2.5]" />
-            <span className="font-bold tracking-tighter text-xl">CURA</span>
+      <footer className="bg-white border-t-4 border-black py-20 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between gap-16">
+          <div className="space-y-6">
+            <div className="flex items-center space-x-3 text-black">
+              <Activity className="h-6 w-6 stroke-[1.5]" />
+              <span className="font-bold tracking-tighter text-3xl font-display">CURA</span>
+            </div>
+            <p className="text-black/50 max-w-sm font-body">
+              The intelligent infrastructure for modern healthcare. Built for scale, secured by design.
+            </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-sm text-[#86868B] font-bold">
-            <a
-              href="#platform"
-              className="hover:text-black transition-colors"
-            >
-              Privacy
-            </a>
-            <a
-              href="#platform"
-              className="hover:text-black transition-colors"
-            >
-              Terms
-            </a>
-            <span>© 2026 CURA Technologies. All rights reserved.</span>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-12 sm:gap-24">
+            <div className="space-y-4">
+              <h4 className="font-mono text-[11px] font-bold tracking-widest text-black/30 uppercase">Platform</h4>
+              <nav className="flex flex-col space-y-3 text-[14px] font-bold">
+                <a href="#" className="hover:line-through">Intelligence</a>
+                <a href="#" className="hover:line-through">Security</a>
+                <a href="#" className="hover:line-through">Global Scale</a>
+              </nav>
+            </div>
+            <div className="space-y-4">
+              <h4 className="font-mono text-[11px] font-bold tracking-widest text-black/30 uppercase">Legal</h4>
+              <nav className="flex flex-col space-y-3 text-[14px] font-bold">
+                <a href="#" className="hover:line-through">Privacy</a>
+                <a href="#" className="hover:line-through">Terms</a>
+              </nav>
+            </div>
+            <div className="space-y-4">
+              <h4 className="font-mono text-[11px] font-bold tracking-widest text-black/30 uppercase">Contact</h4>
+              <nav className="flex flex-col space-y-3 text-[14px] font-bold">
+                <a href="mailto:hello@cura.tech" className="hover:line-through">hello@cura.tech</a>
+              </nav>
+            </div>
           </div>
+        </div>
+        <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-black/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-[12px] font-mono font-bold text-black/40">
+          <span>© 2026 CURA TECHNOLOGIES. ALL RIGHTS RESERVED.</span>
+          <span>STAY STARK.</span>
         </div>
       </footer>
     </div>
